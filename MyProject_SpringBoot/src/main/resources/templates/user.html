@@ -31,10 +31,14 @@
             <td th:text="${user.name}"></td>
             <td th:text="${user.lastName}"></td>
             <td>
-                <a th:href="@{/user/update/{id} (id=${user.id})}">Update</a>
+                <form method="get" th:action="@{/user/update/{id} (id=${user.id})}">
+                    <input type="submit" value="EDIT"/>
+                </form>
             </td>
             <td>
-                <a th:href="@{/user/delete/{id} (id=${user.id})}">Delete</a>
+                <form th:method="DELETE" th:action="@{/user/delete/{id} (id=${user.id})}">
+                    <input type="submit" value="DELETE"/>
+                </form>
             </td>
         </tr>
     </table>

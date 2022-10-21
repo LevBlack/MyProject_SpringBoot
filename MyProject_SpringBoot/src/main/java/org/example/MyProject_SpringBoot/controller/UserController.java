@@ -34,12 +34,20 @@ public class UserController {
     }
 
     @GetMapping("/update/{id}")
-    public String updateUser(@PathVariable("id") int id, Model model) {
+    public String editUser(@PathVariable("id") int id, Model model) {
 
         User user = userService.getUser(id);
-        model.addAttribute("newUser", user);
+        model.addAttribute("editUser", user);
 
-        return "registration";
+        return "update";
+    }
+
+    @PatchMapping("/{id}")
+    public String updateUser(@ModelAttribute("editUser") User user,@PathVariable("id") int id){
+
+        userService.update(id, user);
+
+        return "redirect:/user";
     }
 
     @PostMapping()
@@ -50,7 +58,7 @@ public class UserController {
         return "redirect:/user";
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") int id){
 
         userService.removeUser(id);

@@ -30,14 +30,12 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    @Transactional
     public User getUser(int id) {
         Optional<User> user = userRepository.findById(id);
         return user.orElse(null); //
     }
 
     @Override
-    @Transactional
     public List<User> getAllUsers() {
 
         return userRepository.findAll();
@@ -48,5 +46,14 @@ public class UserServiceImp implements UserService {
     public void removeUser(int id) {
 
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(int id, User user) {
+
+        User userId = userRepository.findById(id).get();
+        userId.setLastName(user.getLastName());
+        userId.setName(user.getName());
+        userRepository.save(userId);
     }
 }
