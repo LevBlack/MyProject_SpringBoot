@@ -49,6 +49,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    @Transactional
     public void update(int id, User user) {
 
         User userId = userRepository.findById(id).get();
